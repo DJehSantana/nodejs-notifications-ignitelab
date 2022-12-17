@@ -1,7 +1,10 @@
+import { Replace } from "src/helpers/Replace";
+import { Content } from "./content";
+
 //define quais atributos uma notificação terá
 export interface NotificationProps {
     recipientId: string;
-    content: string;
+    content: Content;
     category: string;
     readAt?: Date | null;
     createdAt: Date;
@@ -12,8 +15,13 @@ export class Notification {
     private props: NotificationProps;
 
     //recebe por parâmetro todos os dados para criar a notificação
-    constructor(props: NotificationProps) {
-        this.props = props;
+    constructor(props: Replace<NotificationProps, { createdAt?: Date }>) {
+        //recebe todas as propriedades por parâmetro
+        this.props = {
+            ...props,
+            //caso a propriedade createdAt não for preenchida, usará a data atual
+            createdAt: props.createdAt ?? new Date(),
+        };
     }
 
     public set recipientId(recipientId: string) {
@@ -24,11 +32,11 @@ export class Notification {
         return this.props.recipientId;
     }
 
-    public set content(content: string) {
+    public set content(content: Content) {
         this.props.content = content;
     }
 
-    public get content(): string {
+    public get content(): Content {
         return this.props.content;
     }
 
