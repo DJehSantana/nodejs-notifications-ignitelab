@@ -1,7 +1,7 @@
 //o controller no nest vai definir as rotas da aplicação
 
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { AppService } from './app.service';
+//import { AppService } from './app.service';
 import { PrismaService } from './prisma.service';
 //gerador de Id único universal do node
 import { randomUUID } from 'node:crypto';
