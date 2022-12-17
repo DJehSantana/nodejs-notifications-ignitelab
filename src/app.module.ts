@@ -1,17 +1,13 @@
 import { Module } from '@nestjs/common';
-
-import { AppService } from './app.service';
-import { AppController } from './infra/app.controller';
-import { PrismaService } from './infra/prisma.service';
+import { DatabaseModule } from './infra/database/database.module';
+import { HttpModule } from './infra/http/http.module';
 
 
 //o module aclopa vários controllers e vários services
 //ele é basicamente um ponto central para importar esses arquivos
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [PrismaService],
+  imports: [HttpModule, DatabaseModule],
 })
 
 // o App.module é o module principal da nossa aplicação
