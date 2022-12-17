@@ -5,7 +5,7 @@ export class CreateNotificationBody {
     //validações utilizando decorator do nest
     //padronizam status e respostas de erros    
     @IsNotEmpty()
-    @IsUUID()
+    //@IsUUID()
     recipientId: string;
 
 
