@@ -1,5 +1,7 @@
 import { Replace } from "src/helpers/Replace";
 import { Content } from "./content";
+//gerador de id unico e universal do node
+import { randomUUID } from "crypto";
 
 //define quais atributos uma notificação terá
 export interface NotificationProps {
@@ -12,16 +14,22 @@ export interface NotificationProps {
 
 
 export class Notification {
+    private _id: string;
     private props: NotificationProps;
 
     //recebe por parâmetro todos os dados para criar a notificação
     constructor(props: Replace<NotificationProps, { createdAt?: Date }>) {
         //recebe todas as propriedades por parâmetro
+        this._id = randomUUID();
         this.props = {
             ...props,
             //caso a propriedade createdAt não for preenchida, usará a data atual
             createdAt: props.createdAt ?? new Date(),
         };
+    }
+
+    public get id() {
+        return this._id;
     }
 
     public set recipientId(recipientId: string) {

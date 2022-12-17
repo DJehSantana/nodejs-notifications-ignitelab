@@ -1,9 +1,7 @@
 //o controller no nest vai definir as rotas da aplicação
 
 import { Body, Controller, Post } from '@nestjs/common';
-
-//gerador de Id único universal do node
-//import { randomUUID } from 'node:crypto';
+import { SendNotification } from 'src/application/use-cases/send-notification';
 import { CreateNotificationBody } from '../dtos/create-notification-body';
 
 // o @ indica que o método ou classe tem um comportamento decorator que está vindo da
@@ -11,22 +9,27 @@ import { CreateNotificationBody } from '../dtos/create-notification-body';
 @Controller('notifications')
 export class NotificationsController {
 
+  constructor(private sendNotification: SendNotification) {
+
+  }
+
   @Post()
   async create(@Body() body: CreateNotificationBody) {
     //pegando parâmetros do corpo da requisição
     const { recipientId, content, category } = body;
 
-    // criando a tabela no bd com os dados coletados e um Id gerado automaticamente
-    // await this.prisma.notification.create({
-    //data: {
-    // id: randomUUID(),
-    // content,
-    // category,
-    //recipientId,
-    // },
-    //});
+    //chamando o caso de uso que acionará o repository para a persistência dos dados
+    const { notification } = await this.sendNotification.execute({
+      recipientId,
+      content,
+      category,
+    });
+
+
+    return { notification };
+
   }
 }
 
 //o Nest trabalha com o principio de inversão de dependências.
-//o App controller está recebendo a funcionalidade como parâmetro e a instanciado 
+//o  notification-controller está recebendo a funcionalidade como parâmetro e a instanciado 
