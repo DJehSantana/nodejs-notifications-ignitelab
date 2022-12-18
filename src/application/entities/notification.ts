@@ -1,4 +1,4 @@
-import { Replace } from "src/helpers/Replace";
+import { Replace } from "@helpers/Replace";
 import { Content } from "./content";
 //gerador de id unico e universal do node
 import { randomUUID } from "crypto";

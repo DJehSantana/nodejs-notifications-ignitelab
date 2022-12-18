@@ -1,7 +1,7 @@
 //o controller no nest vai definir as rotas da aplicação
 
 import { Body, Controller, Post } from '@nestjs/common';
-import { SendNotification } from 'src/application/use-cases/send-notification';
+import { SendNotification } from '@application/use-cases/send-notification';
 import { CreateNotificationBody } from '../dtos/create-notification-body';
 
 // o @ indica que o método ou classe tem um comportamento decorator que está vindo da
