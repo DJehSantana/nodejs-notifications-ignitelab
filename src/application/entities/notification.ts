@@ -19,9 +19,10 @@ export class Notification {
     private props: NotificationProps;
 
     //recebe por parâmetro todos os dados para criar a notificação
-    constructor(props: Replace<NotificationProps, { createdAt?: Date }>) {
+    constructor(props: Replace<NotificationProps, { createdAt?: Date }>,
+        id?: string) {
         //recebe todas as propriedades por parâmetro
-        this._id = randomUUID();
+        this._id = id ?? randomUUID();
         this.props = {
             ...props,
             //caso a propriedade createdAt não for preenchida, usará a data atual

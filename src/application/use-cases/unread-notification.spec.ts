@@ -3,8 +3,6 @@ import { InMemoryNotificationsRepository } from "@test/repositories/in-memory-no
 import { NotificationNotFound } from "./errors/notification-not-found";
 import { UnreadNotification } from "./unread-notification";
 
-
-
 describe('Unread notification', () => {
     test('Notificação habilitada para desmarcar leitura', async () => {
         const notificationsRepository = new InMemoryNotificationsRepository();
