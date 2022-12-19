@@ -2,6 +2,7 @@ import { Notification } from "@application/entities/notification";
 import { NotificationsRepository } from "@application/repositories/notifications-repository";
 
 export class InMemoryNotificationsRepository implements NotificationsRepository {
+
     public notifications: Notification[] = [];
 
     async create(notification: Notification) {
@@ -33,5 +34,11 @@ export class InMemoryNotificationsRepository implements NotificationsRepository 
         if (notificationIndex >= 0) {
             this.notifications[notificationIndex] = notification;
         }
+    }
+
+    async countManyByRecipientId(recipientId: string): Promise<number> {
+        return this.notifications.filter(
+            (notification) => notification.recipientId == recipientId,
+        ).length;
     }
 };
